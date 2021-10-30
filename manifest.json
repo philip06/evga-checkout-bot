@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+
+  "name": "Discord Scanner Plugin",
+  "description": "This extension will monitor discord channel for changes",
+  "version": "1.0",
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+   },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+  "web_accessible_resources": ["discordScanner.js", "evgaCheckout.js"],
+  "permissions": [
+	  "activeTab",
+    "storage",
+    "*://*/*"
+   ]
+}
