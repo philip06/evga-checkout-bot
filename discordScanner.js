@@ -8,11 +8,11 @@ function mCallbackDiscordChat(mutations, observer) {
 }
 
 function observeDiscordChat() {
-	const observer = new MutationObserver(mCallbackDiscordChat);
 	const elem = document.querySelector('[data-list-id="chat-messages"]');
 
 	if (elem) {
 		console.log("observing discord chat");
+		const observer = new MutationObserver(mCallbackDiscordChat);
 		observer.observe(elem, {
 			childList: true,
 			subtree: true

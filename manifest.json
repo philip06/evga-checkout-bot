@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
 
-  "name": "Discord Scanner Plugin",
-  "description": "This extension will monitor discord channel for changes",
-  "version": "1.0",
+  "name": "EVGA Checkout Bot",
+  "description": "This extension will monitor discord channel for changes, then execute a checkout script on evga b stock",
+  "version": "0.2",
 
   "background": {
     "scripts": ["background.js"]
