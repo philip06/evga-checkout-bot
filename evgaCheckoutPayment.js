@@ -1,6 +1,6 @@
 console.log("evga checkout payment script started");
 
-function mCallbackPaypal(mutations, observer) {
+const mCallbackPaypal = (mutations, observer) => {
 	for (let mutation of mutations) {
 		if (mutation.type === 'attributes' && mutation.attributeName === "style") {
 			observer.disconnect();
@@ -17,7 +17,7 @@ if (!paypalModal) {
 	window.location.href = "https://www.evga.com/products/productlist.aspx?type=8";
 }
 
-observerPaypal = new MutationObserver(mCallbackPaypal);
+const observerPaypal = new MutationObserver(mCallbackPaypal);
 observerPaypal.observe(paypalModal, {
 	attributes: true
 });

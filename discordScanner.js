@@ -1,4 +1,4 @@
-function mCallback(mutations, observer) {
+const mCallback = (mutations, observer) => {
 	for (let mutation of mutations) {
 		if (mutation.type === 'childList' && mutation.addedNodes.length > 0 && mutation.addedNodes[0].textContent.length > 0) {
 			observer.disconnect();
@@ -8,8 +8,8 @@ function mCallback(mutations, observer) {
 }
 
 console.log("discordScanner started");
-observer = new MutationObserver(mCallback);
-elem = document.querySelector('[data-list-id="chat-messages"]');
+const observer = new MutationObserver(mCallback);
+const elem = document.querySelector('[data-list-id="chat-messages"]');
 
 observer.observe(elem, {
   childList: true,

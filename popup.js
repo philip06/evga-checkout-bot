@@ -1,9 +1,9 @@
-document.addEventListener("DOMContentLoaded", function() {
-    var clickedStart = function() {
+document.addEventListener("DOMContentLoaded", () => {
+    const clickedStart = () => {
         chrome.runtime.sendMessage({ message: 'startScanner' });
     }
 
-    var clickedStop = function() {
+    const clickedStop = () => {
         chrome.runtime.sendMessage({ message: 'stopScanner' });
     }
     

@@ -1,6 +1,7 @@
 console.log("evga checkout shipping script started");
 
-function mCallbackAddress(mutations, observer) {
+// Callback functions executed when mutation occurs
+const mCallbackAddress = (mutations, observer) => {
 	for (let mutation of mutations) {
 		if (mutation.type === 'attributes' && mutation.attributeName === "style") {
 			observer.disconnect();
@@ -10,7 +11,7 @@ function mCallbackAddress(mutations, observer) {
 	}
 }
 
-function mCallbackShipCheck(mutations, observer) {
+const mCallbackShipCheck = (mutations, observer) => {
 	for (let mutation of mutations) {
 		if (mutation.type === 'attributes' && mutation.attributeName === "style") {
 			observer.disconnect();
@@ -21,24 +22,21 @@ function mCallbackShipCheck(mutations, observer) {
 	}
 }
 
+// pointers to dom elements we are watching for change
 const modal = document.querySelector('#modalSuggestAddress');
+const shipCheckButtonWrapper = document.querySelector("#divShipFee");
 
-if (!modal) {
+// if elements don't exist, nagivate back to b stock page and continue
+if (!modal || !shipCheckButtonWrapper) {
 	window.location.href = "https://www.evga.com/products/productlist.aspx?type=8";
 }
 
-observerAddress = new MutationObserver(mCallbackAddress);
+const observerAddress = new MutationObserver(mCallbackAddress);
 observerAddress.observe(modal, {
 	attributes: true
 });
 
-const shipCheckButtonWrapper = document.querySelector("#divShipFee");
-
-if (!shipCheckButtonWrapper) {
-	window.location.href = "https://www.evga.com/products/productlist.aspx?type=8";
-}
-
-observerShipCheck = new MutationObserver(mCallbackShipCheck);
+const observerShipCheck = new MutationObserver(mCallbackShipCheck);
 observerShipCheck.observe(shipCheckButtonWrapper, {
 	attributes: true
 });

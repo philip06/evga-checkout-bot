@@ -1,8 +1,7 @@
 let buttonClicked = false;
 
-function mCallbackPaypalContinue(mutations, observer) {
+const mCallbackPaypalContinue = (mutations, observer) => {
 	for (let mutation of mutations) {
-		console.log(mutation);
 		if (mutation.type === 'childList') {
 			observer.disconnect();
 			console.log("Agree to paypal");
