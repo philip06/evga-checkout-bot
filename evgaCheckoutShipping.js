@@ -28,7 +28,7 @@ const shipCheckButtonWrapper = document.querySelector("#divShipFee");
 
 // if elements don't exist, nagivate back to b stock page and continue
 if (!modal || !shipCheckButtonWrapper) {
-	window.location.href = "https://www.evga.com/products/productlist.aspx?type=8";
+	window.location.href = "https://www.evga.com/products/productlist.aspx?type=8&associatecode=S25NV7GJP9H30MG";
 }
 
 const observerAddress = new MutationObserver(mCallbackAddress);

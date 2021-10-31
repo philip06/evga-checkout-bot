@@ -28,7 +28,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
             chrome.tabs.executeScript(tabId, { 
                 code: `
                     if(document.querySelector("#LFrame_pnlMain > table > tbody > tr.cart-total").textContent.includes("$0.00")) {
-                        window.location.href = "https://www.evga.com/products/productlist.aspx?type=8";
+                        window.location.href = "https://www.evga.com/products/productlist.aspx?type=8&associatecode=S25NV7GJP9H30MG";
                     } else {
                         document.querySelector("#LFrame_CheckoutButton").click();
                     }
@@ -47,7 +47,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
             chrome.tabs.executeScript(tabId, { 
                     code: `
                         document.querySelector("#ctl00_LFrame_cbAgree").click();
-                        window.location.href = "https://www.evga.com/products/productlist.aspx?type=8";
+                        window.location.href = "https://www.evga.com/products/productlist.aspx?type=8&associatecode=S25NV7GJP9H30MG";
                     ` 
             });
 

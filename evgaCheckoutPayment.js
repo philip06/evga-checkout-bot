@@ -14,7 +14,7 @@ const mCallbackPaypal = (mutations, observer) => {
 const paypalModal = document.querySelector("#modalPaypal");
 
 if (!paypalModal) {
-	window.location.href = "https://www.evga.com/products/productlist.aspx?type=8";
+	window.location.href = "https://www.evga.com/products/productlist.aspx?type=8&associatecode=S25NV7GJP9H30MG";
 }
 
 const observerPaypal = new MutationObserver(mCallbackPaypal);
