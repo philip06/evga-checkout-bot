@@ -1,9 +1,19 @@
 let scannerRunning = false;
+let refreshCount = 0;
+let refreshMax = 1;
 
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
     switch (request.message) {
         case 'startScanner':
             scannerRunning = true;
+            refreshCount = 0;
+            
+            chrome.storage.sync.get({
+                maxRefreshCount: '1'
+            }, (items) => {
+                console.log(items);
+                refreshMax = parseInt(items.maxRefreshCount);
+            });
             chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
                 chrome.tabs.executeScript(tabs[0].id,
                     { file: `discordScanner.js` });
@@ -12,6 +22,15 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
             break;
         case 'stopScanner':
             scannerRunning = false;
+            refreshCount = 0;
+            break;
+        case 'canRefreshBStock':
+            if (refreshCount < refreshMax) {
+                refreshCount++;
+                sendResponse(true);
+            } else {
+                sendResponse(false);
+            }
             break;
     }
 });
@@ -19,6 +38,7 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === 'complete' && scannerRunning) {
         if (tab?.url && tab.url.includes("discord.com")) {
+            refreshCount = 0;
             chrome.tabs.executeScript(tabId,
                 { file: `discordScanner.js` });
         } else if (tab?.url && tab.url.includes("evga.com/products/productlist.aspx")) {

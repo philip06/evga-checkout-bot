@@ -3,9 +3,12 @@
 <head><title>EVGA Checkout Bot Extension Options</title></head>
 <body>
 
-<label for="modelNumbers">List Model Numbers Separated by Commas (model1,model2,...)</label>
+<label for="modelNumbers">List Model Numbers Separated by Commas (model1,model2,...): </label>
 <textarea id="modelNumbers" cols="50" rows="20">
 </textarea>
+
+<label for="maxRefreshCount">Number of times to refresh before returning to discord: </label>
+<input id="maxRefreshCount" type="text" />
 
 <div id="status"></div>
 <button id="save">Save</button>

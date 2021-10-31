@@ -9,7 +9,7 @@ const addToCart = (card, modelNumber) => {
 let modelNumbers = [];
 
 chrome.storage.sync.get({
-	modelNumbers: 'asdfsdfsdf,220-GT-0750-RX'
+	modelNumbers: 'asdfsdfsdf'
 }, (items) => {
 	console.log(items);
 	modelNumbers = items.modelNumbers.replace(" ", "").split(",");
@@ -32,5 +32,12 @@ chrome.storage.sync.get({
 		});
 	});
 
-	setTimeout(() => window.location.href = "https://discord.com/channels/354382386554863627/508525313873936385", 20000);
+	chrome.runtime.sendMessage({ message: 'canRefreshBStock' },
+		(response) => {
+			if (response) {
+				setTimeout(() => window.location.reload(), 5000);
+			} else {
+				window.location.href = "https://discord.com/channels/354382386554863627/904000318495399967"
+			}
+		});
 });

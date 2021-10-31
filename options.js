@@ -1,9 +1,11 @@
 // Saves options to chrome.storage
 const save_options = () => {
     const modelNumbers = document.getElementById('modelNumbers').value;
-
+    const maxRefreshCount = document.getElementById('maxRefreshCount').value;
+    
     chrome.storage.sync.set({
-        modelNumbers: modelNumbers
+        modelNumbers,
+        maxRefreshCount
     }, () => {
         // Update status to let user know options were saved.
         const status = document.getElementById('status');
@@ -18,9 +20,11 @@ const save_options = () => {
 // stored in chrome.storage.
 const restore_options = () => {
     chrome.storage.sync.get({
-        modelNumbers: ''
+        modelNumbers: 'asdfsdfsdf',
+        maxRefreshCount: '1'
     }, (items) => {
         document.getElementById('modelNumbers').value = items.modelNumbers;
+        document.getElementById('maxRefreshCount').value = items.maxRefreshCount;
     });
 }
 

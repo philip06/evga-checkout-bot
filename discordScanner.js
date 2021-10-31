@@ -1,4 +1,4 @@
-const mCallback = (mutations, observer) => {
+function mCallbackDiscordChat(mutations, observer) {
 	for (let mutation of mutations) {
 		if (mutation.type === 'childList' && mutation.addedNodes.length > 0 && mutation.addedNodes[0].textContent.length > 0) {
 			observer.disconnect();
@@ -7,11 +7,22 @@ const mCallback = (mutations, observer) => {
 	}
 }
 
-console.log("discordScanner started");
-const observer = new MutationObserver(mCallback);
-const elem = document.querySelector('[data-list-id="chat-messages"]');
+function observeDiscordChat() {
+	const observer = new MutationObserver(mCallbackDiscordChat);
+	const elem = document.querySelector('[data-list-id="chat-messages"]');
 
-observer.observe(elem, {
-  childList: true,
-  subtree: true
-});
+	if (elem) {
+		console.log("observing discord chat");
+		observer.observe(elem, {
+			childList: true,
+			subtree: true
+		});
+	} else {
+		// recurses asynchronously, waiting 2 seconds before each recursion
+		// waits for discord chat to load in case it's slow
+		console.log("page not loaded");
+		setTimeout(observeDiscordChat, 2000);
+	}
+}
+
+observeDiscordChat();
