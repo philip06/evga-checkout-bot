@@ -9,9 +9,8 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
             refreshCount = 0;
             
             chrome.storage.sync.get({
-                maxRefreshCount: '1'
+                maxRefreshCount: '2'
             }, (items) => {
-                console.log(items);
                 refreshMax = parseInt(items.maxRefreshCount);
             });
             chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -87,9 +86,9 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
                         func: () => {
                             document.querySelector("#ctl00_LFrame_cbAgree").click();
                             // final submission button, add to above script execution to actually buy item
-                            // document.querySelector("#ctl00_LFrame_btncontinue").click();
+                            document.querySelector("#ctl00_LFrame_btncontinue").click();
                             // remove this upon adding above line
-                            window.location.href = "https://www.evga.com/products/productlist.aspx?type=8&associatecode=S25NV7GJP9H30MG";
+                            // window.location.href = "https://www.evga.com/products/productlist.aspx?type=8&associatecode=S25NV7GJP9H30MG";
                         }
                     });
                 } else if (tab?.url && tab.url.includes("evga.com/Cart/Checkout_Success.aspx")) {
