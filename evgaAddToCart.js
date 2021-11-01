@@ -11,8 +11,8 @@ let modelNumbers = [];
 chrome.storage.sync.get({
 	modelNumbers: 'asdfsdfsdf,220-GT-0750-RX'
 }, (items) => {
-	console.log(items);
 	modelNumbers = items.modelNumbers.replace(" ", "").split(",");
+	console.log("modelNumbers", modelNumbers);
 
 	const cardList = document.querySelector("#ctl00_LFrame_prdList_rlvProdList_ctrl0_pnlGroupContainer");
 

@@ -93,7 +93,12 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
                         }
                     });
                 } else if (tab?.url && tab.url.includes("evga.com/Cart/Checkout_Success.aspx")) {
-                    window.location.href = "https://www.evga.com/products/productlist.aspx?type=8&associatecode=S25NV7GJP9H30MG";
+                    chrome.scripting.executeScript({
+                        target: { tabId }, 
+                        func: () => {
+                            window.location.href = "https://www.evga.com/products/productlist.aspx?type=8&associatecode=S25NV7GJP9H30MG";
+                        }
+                    });
                 }
             }
         });
