@@ -1,25 +1,26 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "name": "EVGA Checkout Bot",
   "description": "This extension will monitor discord channel for changes, then execute a checkout script on evga b stock",
   "version": "0.2",
 
   "background": {
-    "scripts": ["background.js"]
+    "service_worker": "background.js"
   },
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html"
    },
   "options_ui": {
     "page": "options.html",
     "open_in_tab": false
   },
-  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
-  "web_accessible_resources": ["discordScanner.js", "evgaCheckout.js"],
   "permissions": [
 	  "activeTab",
     "storage",
+    "scripting"
+   ],
+   "host_permissions": [
     "*://*/*"
    ]
 }

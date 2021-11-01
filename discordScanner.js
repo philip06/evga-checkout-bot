@@ -7,7 +7,7 @@ function mCallbackDiscordChat(mutations, observer) {
 	}
 }
 
-function observeDiscordChat() {
+function observeDiscordChat(depth) {
 	const elem = document.querySelector('[data-list-id="chat-messages"]');
 
 	if (elem) {
@@ -21,8 +21,9 @@ function observeDiscordChat() {
 		// recurses asynchronously, waiting 2 seconds before each recursion
 		// waits for discord chat to load in case it's slow
 		console.log("page not loaded");
-		setTimeout(observeDiscordChat, 2000);
+		if (depth > 0)
+			setTimeout(() => observeDiscordChat(depth-1), 2000);
 	}
 }
 
-observeDiscordChat();
+observeDiscordChat(2);

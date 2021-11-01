@@ -1,4 +1,4 @@
-console.log("evgaAddToCart started");
+console.log("evga add to cart script started");
 
 const addToCart = (card, modelNumber) => {
 	console.log("buy: ", modelNumber);
@@ -9,7 +9,7 @@ const addToCart = (card, modelNumber) => {
 let modelNumbers = [];
 
 chrome.storage.sync.get({
-	modelNumbers: 'asdfsdfsdf'
+	modelNumbers: 'asdfsdfsdf,220-GT-0750-RX'
 }, (items) => {
 	console.log(items);
 	modelNumbers = items.modelNumbers.replace(" ", "").split(",");
@@ -19,7 +19,7 @@ chrome.storage.sync.get({
 	// good cards come at the bottom, so start there
 	const cards = [...cardList.children].reverse();
 
-	modelNumbers.slice(0, 2).forEach(model => {
+	modelNumbers.forEach(model => {
 		cards.forEach(card => {
 			const modelNumber = card.querySelector("p.pl-list-pn").textContent.replace("P/N: ", "");
 			if (model === modelNumber) {
@@ -37,7 +37,7 @@ chrome.storage.sync.get({
 			if (response) {
 				setTimeout(() => window.location.reload(), 5000);
 			} else {
-				window.location.href = "https://discord.com/channels/354382386554863627/904000318495399967"
+				setTimeout(() => window.location.href = "https://discord.com/channels/354382386554863627/904000318495399967", 5000);
 			}
 		});
 });

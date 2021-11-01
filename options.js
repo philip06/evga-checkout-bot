@@ -20,7 +20,7 @@ const save_options = () => {
 // stored in chrome.storage.
 const restore_options = () => {
     chrome.storage.sync.get({
-        modelNumbers: 'asdfsdfsdf',
+        modelNumbers: 'asdfsdfsdf,220-GT-0750-RX',
         maxRefreshCount: '1'
     }, (items) => {
         document.getElementById('modelNumbers').value = items.modelNumbers;
