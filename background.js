@@ -17,7 +17,7 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
                 chrome.scripting.executeScript({
                     target: { tabId: tabs[0].id },
                     func: () => {
-                        window.location.href = "https://discord.com/channels/354382386554863627/904000318495399967";
+                        window.location.href = "https://discord.com/channels/767566223729754122/869681156797390849";
                     } 
                 });
             });
