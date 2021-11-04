@@ -62,6 +62,9 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
                         target: { tabId }, 
                         func: () => {
                             if(document.querySelector("#LFrame_pnlMain > table > tbody > tr.cart-total").textContent.includes("$0.00")) {
+                                if (document.querySelector("#LFrame_CartRepeater_RemoveButton_0")) {
+                                    document.querySelector("#LFrame_CartRepeater_RemoveButton_0").click();
+                                }
                                 window.location.href = "https://www.evga.com/products/productlist.aspx?type=8&associatecode=S25NV7GJP9H30MG";
                             } else {
                                 document.querySelector("#LFrame_CheckoutButton").click();
