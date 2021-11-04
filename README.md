@@ -12,3 +12,4 @@ Not currently on the chrome web store, so the extension must be installed manual
 Requires the following to function properly:
 - [x] login to a paypal account on chrome profile
 - [x] login to an evga account on chrome profile
+- [x] evga cart must be empty
