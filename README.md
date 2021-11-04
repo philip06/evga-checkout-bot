@@ -10,6 +10,5 @@ Not currently on the chrome web store, so the extension must be installed manual
  - Input the desired model numbers, and the number of times you'd like to refresh b stock page before going back to discord
 
 Requires the following to function properly:
-- [ ] start the script while viewing the Falcodrin b stock [discord channel](https://discord.com/channels/767566223729754122/869681156797390849)
-- [ ] login to a paypal account on chrome profile
-- [ ] login to an evga account on chrome profile
+- [x] login to a paypal account on chrome profile
+- [x] login to an evga account on chrome profile
