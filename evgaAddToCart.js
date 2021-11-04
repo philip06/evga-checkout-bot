@@ -37,7 +37,7 @@ chrome.storage.sync.get({
 			if (response) {
 				setTimeout(() => window.location.reload(), 5000);
 			} else {
-				setTimeout(() => window.location.href = "https://discord.com/channels/767566223729754122/869681156797390849", 5000);
+				setTimeout(() => window.location.href = "https://discord.com/channels/354382386554863627/904000318495399967", 5000);
 			}
 		});
 });

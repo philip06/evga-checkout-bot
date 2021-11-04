@@ -1,4 +1,3 @@
-chrome.storage.local.set({ scannerRunning: false });
 let refreshCount = 0;
 let refreshMax = 1;
 
@@ -13,19 +12,22 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
             }, (items) => {
                 refreshMax = parseInt(items.maxRefreshCount);
             });
+            
             chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
                 chrome.scripting.executeScript({
                     target: { tabId: tabs[0].id },
                     func: () => {
-                        window.location.href = "https://discord.com/channels/767566223729754122/869681156797390849";
+                        window.location.href = "https://discord.com/channels/354382386554863627/904000318495399967";
                     } 
                 });
             });
             
             break;
         case 'stopScanner':
-            chrome.storage.local.set({ scannerRunning: false });
             refreshCount = 0;
+            chrome.storage.local.set({ scannerRunning: false });
+
+            chrome.tabs.reload(sender.id);
             break;
         case 'canRefreshBStock':
             if (refreshCount < refreshMax) {
@@ -40,8 +42,9 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === 'complete') {
-        chrome.storage.local.get('scannerRunning', (scannerRunning) => {
-            if (scannerRunning) {
+        chrome.storage.local.get('scannerRunning', (res) => {
+            console.log(res.scannerRunning);
+            if (res.scannerRunning) {
                 if (tab?.url && tab.url.includes("discord.com")) {
                     refreshCount = 0;
                     chrome.scripting.executeScript({
@@ -83,13 +86,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
                 } else if (tab?.url && tab.url.includes("evga.com/Cart/Checkout_PlaceOrder.aspx")) {
                     chrome.scripting.executeScript({
                         target: { tabId }, 
-                        func: () => {
-                            document.querySelector("#ctl00_LFrame_cbAgree").click();
-                            // final submission button, add to above script execution to actually buy item
-                            document.querySelector("#ctl00_LFrame_btncontinue").click();
-                            // remove this upon adding above line
-                            // window.location.href = "https://www.evga.com/products/productlist.aspx?type=8&associatecode=S25NV7GJP9H30MG";
-                        }
+                        files: [`evgaPlaceOrder.js`]
                     });
                 } else if (tab?.url && tab.url.includes("evga.com/Cart/Checkout_Success.aspx")) {
                     chrome.scripting.executeScript({
