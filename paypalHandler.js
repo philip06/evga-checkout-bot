@@ -15,7 +15,7 @@ function checkElement(selector) {
 }
 
 
-checkElement('#payment-submit-btn') //use whichever selector you want
+checkElement('#payment-submit-btn')
 .then(() => {
 	 document.querySelector("#payment-submit-btn").click();
 });

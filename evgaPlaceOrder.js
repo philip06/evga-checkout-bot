@@ -17,6 +17,11 @@ function checkElement(selector) {
 
 document.querySelector("#ctl00_LFrame_cbAgree").click();
 
+checkElement('#ctl00_LFrame_cbPayPalSignature')
+.then(() => {
+    document.querySelector("#ctl00_LFrame_cbPayPalSignature").click();
+});
+
 checkElement('#ctl00_LFrame_btncontinue') //use whichever selector you want
 .then(() => {
 	 document.querySelector("#ctl00_LFrame_btncontinue").click();
