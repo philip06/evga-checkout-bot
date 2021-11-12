@@ -49,7 +49,7 @@ chrome.storage.sync.get({
 				const modelNumber = card.querySelector("p.pl-list-pn").textContent.replace("P/N: ", "");
 				if (model === modelNumber) {
 					chrome.storage.sync.set({
-						modelNumbers: modelNumbers.filter(item => item !== modelNumber).join(",")
+						modelNumbers: modelNumbers.map(tier => tier.filter(modelNumber => model !== modelNumber).join(",")).join("|")
 					});
 	
 					addToCart(card, modelNumber);
