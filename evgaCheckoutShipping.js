@@ -4,16 +4,15 @@ console.log("evga checkout shipping script started");
 const res = {"d":"{\"IsSuccess\":true,\"Data\":[{\"code\":\"E\",\"service\":\"UPS SurePost, USPS delivery\",\"negotiatedrate\":\"7.95\",\"text\":\"UPS SurePost, USPS delivery ($7.95)\"},{\"code\":\"03\",\"service\":\"\u003cspan class=\u0027arrives-by-text\u0027\u003eEstimated Arrival Date \u003cspan class=\u0027estimated-date\u0027\u003eMonday, November 22 - 24, 2021\u003c/span\u003e\u003c/span\u003eUPS Ground\",\"negotiatedrate\":\"13.01\",\"text\":\"\u003cspan class=\u0027arrives-by-text\u0027\u003eEstimated Arrival Date \u003cspan class=\u0027estimated-date\u0027\u003eMonday, November 22 - 24, 2021\u003c/span\u003e\u003c/span\u003eUPS Ground ($13.01)\"},{\"code\":\"12\",\"service\":\"\u003cspan class=\u0027arrives-by-text\u0027\u003eEstimated Arrival Date \u003cspan class=\u0027estimated-date\u0027\u003eThursday, November 18 - 20, 2021\u003c/span\u003e\u003c/span\u003eUPS 3 Day Select\",\"negotiatedrate\":\"20.39\",\"text\":\"\u003cspan class=\u0027arrives-by-text\u0027\u003eEstimated Arrival Date \u003cspan class=\u0027estimated-date\u0027\u003eThursday, November 18 - 20, 2021\u003c/span\u003e\u003c/span\u003eUPS 3 Day Select ($20.39)\"},{\"code\":\"02\",\"service\":\"\u003cspan class=\u0027arrives-by-text\u0027\u003eEstimated Arrival Date \u003cspan class=\u0027estimated-date\u0027\u003eWednesday, November 17 - 19, 2021\u003c/span\u003e\u003c/span\u003eUPS 2nd Day Air\",\"negotiatedrate\":\"23.94\",\"text\":\"\u003cspan class=\u0027arrives-by-text\u0027\u003eEstimated Arrival Date \u003cspan class=\u0027estimated-date\u0027\u003eWednesday, November 17 - 19, 2021\u003c/span\u003e\u003c/span\u003eUPS 2nd Day Air ($23.94)\"},{\"code\":\"13\",\"service\":\"\u003cspan class=\u0027arrives-by-text\u0027\u003eEstimated Arrival Date \u003cspan class=\u0027estimated-date\u0027\u003eTuesday, November 16 - 18, 2021\u003c/span\u003e\u003c/span\u003eUPS Next Day Air Saver\",\"negotiatedrate\":\"37.00\",\"text\":\"\u003cspan class=\u0027arrives-by-text\u0027\u003eEstimated Arrival Date \u003cspan class=\u0027estimated-date\u0027\u003eTuesday, November 16 - 18, 2021\u003c/span\u003e\u003c/span\u003eUPS Next Day Air Saver ($37.00)\"}],\"Code\":0,\"Message\":null}"};
 
 function GotShippingFee_override(result) {
-	$('.ajax-bg').addClass('hide-ajax-loader');
+	document.querySelector('.ajax-bg').classList.add('hide-ajax-loader');
 	var rtn = JSON.parse(result);
 	if (rtn.IsSuccess) {
-		$("#divShipFeeList").empty();
 		for (var i = 0; i < rtn.Data.length; i++) {
-			var radioBtn = $('<div><input type="radio" name="rdoShipFee" value="' + rtn.Data[i].code + '_' + rtn.Data[i].negotiatedrate + '" id="rdoShipFee' + rtn.Data[i].code + '"/><label for="rdoShipFee' + rtn.Data[i].code + '">' + rtn.Data[i].text + '</label></div>');
-			radioBtn.appendTo('#divShipFeeList');
+			var radioBtn = '<div><input type="radio" name="rdoShipFee" value="' + rtn.Data[i].code + '_' + rtn.Data[i].negotiatedrate + '" id="rdoShipFee' + rtn.Data[i].code + '"/><label for="rdoShipFee' + rtn.Data[i].code + '">' + rtn.Data[i].text + '</label></div>';
+			document.querySelector('#divShipFeeList').innerHTML = radioBtn;
 		}
 		if (rtn.Data.length > 0) {
-			$('[name="rdoShipFee"]')[0].checked = true;
+			document.querySelector('[name="rdoShipFee"]').checked = true;
 			document.getElementById("divShipFee").style.display = "block";
 			DisableAllAddressField(true);
 		}

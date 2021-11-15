@@ -57,7 +57,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
                         target: { tabId },
                         files: [`evgaAddToCart.js`] 
                     });
-                } else if (tab?.url && tab.url.includes("evga.com/products/shoppingcart.aspx")) {
+                } else if (tab?.url && tab.url.includes("evga.com/products/ShoppingCart.aspx")) {
                     chrome.scripting.executeScript({
                         target: { tabId }, 
                         func: () => {
