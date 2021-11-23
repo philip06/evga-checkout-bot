@@ -1,5 +1,13 @@
 let refreshCount = 0;
-let refreshMax = 1;
+let refreshMax = 2;
+
+chrome.storage.local.set({
+    modelNumbers: "01G-P3-1313-RX,10G-P5-3897-RX,08G-P5-3667-RX,10G-P5-3885-RX|08G-P5-3665-RX,08G-P5-3663-RX,10G-P5-3895-RX,10G-P5-3883-RX,10G-P5-3881-RX|08G-P5-3767-RX,08G-P5-3755-RX,08G-P5-3753-RX,08G-P5-3751-RX,10G-P5-3898-RX,10G-P5-3888-RX,10G-P5-3899-RX,10G-P5-3889-RX|24G-P5-3987-RX,24G-P5-3985-RX,24G-P5-3975-RX,24G-P5-3973-RX,24G-P5-3971-RX,24G-P5-3988-RX,24G-P5-3989-RX,24G-P5-3978-RX,24G-P5-3998-RX,24G-P5-3999-RX,24G-P5-3979-RX|10G-P5-3897-RL,10G-P5-3885-RL,10G-P5-3895-RL,10G-P5-3883-RL,10G-P5-3881-RL,10G-P5-3898-RL,10G-P5-3888-RL,10G-P5-3899-RL,10G-P5-3889-RL,08G-P5-3767-RL,08G-P5-3755-RL,08G-P5-3751-RL,08G-P5-3753-RL,12G-P5-3657-RX,12G-P5-3655-RX|08G-P5-3667-RL,08G-P5-3663-RL,08G-P5-3665-RL,08G-P5-3797-RX,08G-P5-3785-RX,08G-P5-3783-RX,12G-P5-3967-RX,12G-P5-3953-RX,12G-P5-3968-RX,12G-P5-3958-RX,12G-P5-3969-RX,12G-P5-3959-RX|06G-P4-1061-RX,06G-P4-1066-RX,06G-P4-1068-RX"
+});
+
+chrome.storage.local.set({
+    maxRefreshCount: 2
+});
 
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
     switch (request.message) {
@@ -7,9 +15,7 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
             chrome.storage.local.set({ scannerRunning: true });
             refreshCount = 0;
             
-            chrome.storage.sync.get({
-                maxRefreshCount: '2'
-            }, (items) => {
+            chrome.storage.local.get("maxRefreshCount", (items) => {
                 refreshMax = parseInt(items.maxRefreshCount);
             });
             
@@ -51,13 +57,13 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
                         target: { tabId },
                         files: [`discordScanner.js`]
                     });
-                } else if (tab?.url && tab.url.includes("evga.com/products/productlist.aspx")) {
+                } else if (tab?.url && tab.url.toLowerCase().includes("evga.com/products/productlist.aspx")) {
                     console.log("add to cart");
                     chrome.scripting.executeScript({
                         target: { tabId },
                         files: [`evgaAddToCart.js`] 
                     });
-                } else if (tab?.url && tab.url.includes("evga.com/products/ShoppingCart.aspx")) {
+                } else if (tab?.url && tab.url.toLowerCase().includes("evga.com/products/shoppingcart.aspx")) {
                     chrome.scripting.executeScript({
                         target: { tabId }, 
                         func: () => {

@@ -14,7 +14,6 @@ function GotShippingFee_override(result) {
 		if (rtn.Data.length > 0) {
 			document.querySelector('[name="rdoShipFee"]').checked = true;
 			document.getElementById("divShipFee").style.display = "block";
-			DisableAllAddressField(true);
 		}
 	}
 	else {
