@@ -3,7 +3,7 @@
 
   "name": "EVGA Checkout Bot",
   "description": "This extension will monitor discord channel for changes, then execute a checkout script on evga b stock",
-  "version": "0.72",
+  "version": "0.73",
 
   "background": {
     "service_worker": "background.js"
