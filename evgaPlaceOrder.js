@@ -22,7 +22,7 @@ checkElement('#ctl00_LFrame_cbPayPalSignature')
     document.querySelector("#ctl00_LFrame_cbPayPalSignature").click();
 });
 
-checkElement('#ctl00_LFrame_btncontinue') //use whichever selector you want
-.then(() => {
-	 document.querySelector("#ctl00_LFrame_btncontinue").click();
-});
+// checkElement('#ctl00_LFrame_btncontinue') //use whichever selector you want
+// .then(() => {
+// 	 document.querySelector("#ctl00_LFrame_btncontinue").click();
+// });
